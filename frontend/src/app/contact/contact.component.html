@@ -1,0 +1,23 @@
+<div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+    <div class="w-2/3 md:w-1/2">
+        <h3 class="text-lg font-bold">Contact Us</h3>
+        <p class="mt-4">Phone: +1234567890</p>
+        <p>Email: info@ngstore.com</p>
+        <p>Customer Service: +1234567891</p>
+        <p>Working Hours: Monday-Friday, 9am-5pm</p>
+      </div>
+    <div class="w-full md:w-2/3">
+       
+      <div class="bg-gray-100 p-4 rounded-md h-16 overflow-y-auto">
+        <div *ngFor="let message of messages" class="message p-2 rounded-md mb-2" [ngClass]="{'user': message.isUser}">
+          <span>{{ message.content }}</span>
+        </div>
+      </div>
+      <div class="flex items-center mt-4">
+        <input type="text" [(ngModel)]="newMessage" placeholder="Type your message..." class="w-full text-gray-800 p-2 rounded-md border border-gray-900 mr-2" (keydown.enter)="sendMessage()" />
+        <button class="bg-blue-500 text-white py-2 px-4 rounded-md" (click)="sendMessage()">Send</button>
+      </div>
+    </div>
+ 
+  </div>
+  

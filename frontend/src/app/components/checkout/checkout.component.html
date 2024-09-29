@@ -1,0 +1,63 @@
+<div *ngIf="formSubmitted; else checkoutFormSubmitted">
+    <div class="bg-white p-4 rounded-lg shadow-lg">
+      <h2 class="text-xl font-bold mb-4">Thank you for your order!</h2>
+      <p class="text-lg mb-4">We have received your order and will begin processing it shortly.</p>
+      <p class="text-lg mb-4">You will receive an email with your order confirmation and tracking information once your order has shipped.</p>
+      <p class="text-lg mb-4">If you have any questions or concerns, please contact us at support@rbkecommerce.com.</p>
+    </div>
+  </div>
+  
+  <ng-template #checkoutFormSubmitted>
+    <form (ngSubmit)="handleSubmit()" class="space-y-4">
+      <div class="flex justify-between space-x-4">
+        <div class="w-full max-w-sm">
+          <label class="block text-gray-700 font-bold mb-2" for="name">Name</label>
+          <input class="appearance-none border" [class.border-red-500]="formErrors.name" [(ngModel)]="personalInfo.name" name="name" type="text" placeholder="Enter your name">
+          <p class="text-red-500 text-xs italic" *ngIf="formErrors.name">{{ formErrors.name }}</p>
+        </div>
+        <div class="w-full max-w-sm">
+          <label class="block text-gray-700 font-bold mb-2" for="email">Email</label>
+          <input class="appearance-none border" [class.border-red-500]="formErrors.email" [(ngModel)]="personalInfo.email" name="email" type="email" placeholder="Enter your email">
+          <p class="text-red-500 text-xs italic" *ngIf="formErrors.email">{{ formErrors.email }}</p>
+        </div>
+        <div class="w-full max-w-sm">
+          <label class="block text-gray-700 font-bold mb-2" for="phone">Phone</label>
+          <input class="appearance-none border" [class.border-red-500]="formErrors.phone" [(ngModel)]="personalInfo.phone" name="phone" type="tel" placeholder="Enter your phone number">
+          <p class="text-red-500 text-xs italic" *ngIf="formErrors.phone">{{ formErrors.phone }}</p>
+        </div>
+      </div>
+      <div class="flex justify-between space-x-4">
+        <div class="w-full max-w-sm">
+          <label class="block text-gray-700 font-bold mb-2" for="address">Address</label>
+          <input class="appearance-none border" [class.border-red-500]="formErrors.address" [(ngModel)]="personalInfo.address" name="address" type="text" placeholder="Enter your address">
+          <p class="text-red-500 text-xs italic" *ngIf="formErrors.address">{{ formErrors.address }}</p>
+        </div>
+        <div class="w-full max-w-sm">
+          <label class="block text-gray-700 font-bold mb-2" for="city">City</label>
+          <input class="appearance-none border" [class.border-red-500]="formErrors.city" [(ngModel)]="personalInfo.city" name="city" type="text" placeholder="Enter your city">
+          <p class="text-red-500 text-xs italic" *ngIf="formErrors.city">{{ formErrors.city }}</p>
+        </div>
+        <div class="w-full max-w-sm">
+          <label class="block text-gray-700 font-bold mb-2" for="state">State</label>
+          <input class="appearance-none border" [class.border-red-500]="formErrors.state" [(ngModel)]="personalInfo.state" name="state" type="text" placeholder="Enter your state">
+          <p class="text-red-500 text-xs italic" *ngIf="formErrors.state">{{ formErrors.state }}</p>
+        </div>
+      </div>
+      <div class="flex justify-between space-x-4">
+        <div class="w-full max-w-sm">
+          <label class="block text-gray-700 font-bold mb-2" for="zip_code">Zip Code</label>
+          <input class="appearance-none border" [class.border-red-500]="formErrors.zip_code" [(ngModel)]="personalInfo.zip_code" name="zip_code" type="text" placeholder="Enter your zip code">
+          <p class="text-red-500 text-xs italic" *ngIf="formErrors.zip_code">{{ formErrors.zip_code }}</p>
+        </div>
+        <div class="w-full max-w-sm">
+          <label class="block text-gray-700 font-bold mb-2" for="country">Country</label>
+          <input class="appearance-none border" [class.border-red-500]="formErrors.country" [(ngModel)]="personalInfo.country" name="country" type="text" placeholder="Enter your country">
+          <p class="text-red-500 text-xs italic" *ngIf="formErrors.country">{{ formErrors.country }}</p>
+        </div>
+      </div>
+      <div>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Place Order</button>
+      </div>
+    </form>
+  </ng-template>
+  

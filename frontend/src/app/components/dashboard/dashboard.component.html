@@ -1,0 +1,39 @@
+<div class="flex justify-center bg-blue-500 py-4">
+   <div class="flex space-x-4">
+      <button class="px-4 py-2 text-white rounded-md focus:outline-none focus:bg-blue-600"
+         (click)="showUnshowProducts()">
+         Products
+      </button>
+
+      <button class="px-4 py-2 text-white rounded-md focus:outline-none focus:bg-blue-600"
+         (click)="showUnshowCategories()">
+         Categories
+      </button>
+
+      <button class="px-4 py-2 text-white rounded-md focus:outline-none focus:bg-blue-600"
+      (click)="showUnshowOrders()">
+         Orders
+      </button>
+
+      <button class="px-4 py-2 text-white rounded-md focus:outline-none focus:bg-blue-600" (click)="showUnshowUsers()">
+         Users
+      </button>
+   </div>
+</div>
+
+<!-- This section shows only if user clicks Products button -->
+<div *ngIf="showMoreProducts">
+   <app-manage-products></app-manage-products>
+</div>
+<!-- This section shows only if user clicks Categories button -->
+<div *ngIf="showMoreCategories">
+   <app-manage-categories></app-manage-categories>
+</div>
+<!-- This section shows only if user clicks Users button -->
+<div *ngIf="showMoreOrders">
+   <app-manage-orders></app-manage-orders>
+</div>
+<!-- This section shows only if user clicks Users button -->
+<div *ngIf="showMoreUsers">
+   <app-users></app-users>
+</div>

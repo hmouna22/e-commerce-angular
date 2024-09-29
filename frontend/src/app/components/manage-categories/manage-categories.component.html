@@ -1,0 +1,36 @@
+<div class="flex flex-col">
+    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+            <div class="overflow-hidden">
+                <table class="min-w-full text-left text-sm font-light">
+                    <thead class="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-600">
+                        <tr>
+                            <th scope="col" class=" px-6 py-4">Category id</th>
+                            <th scope="col" class=" px-6 py-4">Category name</th>
+                            <th scope="col" class=" px-6 py-4">Description</th>
+                            <th scope="col" class=" px-6 py-4"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let category of categories"
+                            class="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700">
+                            <td class="whitespace-nowrap px-6 py-4">{{category.category_id}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{category.category_name}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{category.description}}</td>
+                            <td class="whitespace-nowrap px-6 py-4"><button
+                                class="ml-2 px-4 py-2 text-white bg-red-500 rounded-md" (click)="deleteCategory(category.category_id)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<button class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="showUnshowAdd()">
+    Add new category
+</button>
+<!-- This section shows only if user clicks Products button -->
+<div *ngIf="showAddCategory">
+    <app-add-category></app-add-category>
+</div>

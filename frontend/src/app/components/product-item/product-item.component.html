@@ -1,0 +1,199 @@
+<div
+  class="bg-white shadow-md rounded-md overflow-hidden product-item product-item-wrapper w-full md:w-1/3 lg:w-1/4 inline-block"
+>
+  <div class="flex justify-center">
+    <img class="h-52" src="{{ product.image }}" alt="Product Image" />
+  </div>
+  <div class="p-2 product-details">
+    <h3 class="font-bold text-lg mb-2">{{ product.product_name }}</h3>
+    <p class="text-gray-700 text-base mb-2">
+      {{ product.description | slice : 0 : 80
+      }}{{ product.description.length > 80 ? "..." : "" }}
+    </p>
+    <div class="mt-4 flex items-center">
+      <div class="mr-2 text-lg font-bold">4.0</div>
+      <div class="flex items-center">
+        <ng-container *ngFor="let _ of range(4)"
+          ><span class="text-2xl text-yellow-400">&#9733;</span></ng-container
+        >
+        <span class="text-2xl text-gray-400">&#9733;</span>
+      </div>
+      <div class="ml-2 text-gray-500">(7 reviews)</div>
+    </div>
+    <p class="text-green-600 text-lg font-bold">{{ product.price }} TND</p>
+    <p class="font-bold text-gray-500 text-sm mb-2">
+      In Stock: {{ product.stock }}
+    </p>
+
+    <div class="flex mt-4 button-container">
+      <button
+        class="bg-blue-500 text-white py-2 px-4 rounded-md ml-32 hover:bg-blue-600"
+        (click)="showDetailsModal = true"
+      >
+        <span> More details</span>
+      </button>
+    </div>
+
+    <ng-container *ngIf="showDetailsModal">
+      <div
+        class="fixed inset-0 z-10 flex items-center justify-center overflow-x-hidden outline-none focus:outline-none p-4"
+      >
+        <div
+          class="relative w-auto my-6 mx-auto max-w-3xl h-5/6 overflow-y-auto"
+        >
+          <div class="bg-white shadow-md rounded-md">
+            <div class="flex justify-center p-4">
+              <img
+                class="w-1/2 h-auto"
+                [src]="product.image"
+                alt="Product Image"
+              />
+            </div>
+            <div class="p-4 product-details">
+              <h3 class="font-bold text-lg mb-2">{{ product.product_name }}</h3>
+              <p class="text-gray-700 text-base mb-2">
+                {{ product.description }}
+              </p>
+              <div class="mt-4 flex items-center">
+                <div class="mr-2 text-lg font-bold">4.0</div>
+                <div class="flex items-center">
+                  <ng-container *ngFor="let _ of range(4)"
+                    ><span class="text-2xl text-yellow-400"
+                      >&#9733;</span
+                    ></ng-container
+                  >
+                  <span class="text-2xl text-gray-400">&#9733;</span>
+                </div>
+                <div class="ml-2 text-gray-500">(7 reviews)</div>
+              </div>
+              <p class="text-green-600 text-lg font-bold">
+                {{ product.price }} TND
+              </p>
+              <p class="font-bold text-gray-500 text-sm mb-2">
+                In Stock: {{ product.stock }}
+              </p>
+              <div class="flex mt-4 justify-center">
+                <button
+                  *ngIf="!addButton"
+                  class="bg-green-500 text-white py-2 px-4 rounded-md mr-2 hover:bg-green-600"
+                  (click)="addClicked()"
+                >
+                  Add to Cart
+                </button>
+                <div class="w-40" *ngIf="addButton">
+                  <input
+                    [defaultValue]="1"
+                    type="number"
+                    class="border border-gray-600 rounded-md px-4 py-2 w-1/2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    #newQuantity
+                  />
+                  <button
+                    class="bg-green-500 text-white py-2 px-4 rounded-md mr-2 hover:bg-green-600 ml-2"
+                    (click)="
+                      addToCart(product, newQuantity.value); addButton = false
+                    "
+                  >
+                    Add
+                  </button>
+                </div>
+                <button
+                  class="text-white py-2 px-4 rounded-md ml-40 hover:bg-blue-600
+  {{ showReviewForm ? 'bg-orange-500' : 'bg-blue-500' }}"
+                  (click)="toggleReviewForm()"
+                >
+                  {{ showReviewForm ? "Cancel Review" : "Leave a Review" }}
+                </button>
+
+                <button
+                  class="bg-red-500 text-white py-2 px-8 rounded-md ml-auto hover:bg-red-600"
+                  (click)="closeModal()"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+            <div class="p-4" *ngIf="showReviewForm">
+              <h4 class="font-bold mb-2">Write a Review</h4>
+              <form>
+                <div class="mb-4">
+                  <label class="block text-sm font-bold mb-2" for="reviewTitle"
+                    >Title</label
+                  >
+                  <input
+                    class="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    type="text"
+                    id="reviewTitle"
+                    [(ngModel)]="reviewTitle"
+                    name="reviewTitle"
+                    required
+                  />
+                </div>
+                <div class="mb-4">
+                  <label
+                    class="block text-sm font-bold mb-2"
+                    for="reviewContent"
+                    >Content</label
+                  >
+                  <textarea
+                    class="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    id="reviewContent"
+                    [(ngModel)]="reviewContent"
+                    name="reviewContent"
+                    required
+                  ></textarea>
+                </div>
+                <div class="mb-4">
+                  <label class="block text-sm font-bold mb-2" for="reviewRating"
+                    >Rating</label
+                  >
+                  <div class="flex">
+                    <label
+                      *ngFor="let i of [1, 2, 3, 4, 5]"
+                      class="text-2xl cursor-pointer"
+                    >
+                      <input
+                        type="radio"
+                        name="rating"
+                        [value]="i"
+                        [(ngModel)]="rating"
+                        required
+                      />
+                      <span class="flex items-center justify-center">
+                        <svg
+                          class="w-6 h-6 fill-current {{
+                            i === 1
+                              ? 'text-red-500'
+                              : i === 5
+                              ? 'text-green-500'
+                              : 'text-yellow-400'
+                          }}"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            d="M10 1l2.928 5.763L19 7.55l-4.224 4.122.99 5.764L10 15.263l-5.766 2.174.989-5.764L1 7.55l6.072-.787L10 1z"
+                          />
+                        </svg>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="flex justify-end">
+                  <button
+                    class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                    type="button"
+                    (click)="submitReview()"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fixed inset-0 z-0 bg-black opacity-50"></div>
+    </ng-container>
+  </div>
+</div>

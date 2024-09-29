@@ -1,0 +1,48 @@
+<div class="container mx-auto py-8">
+  <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
+    <h2 class="text-2xl font-bold mb-4">Add New Product</h2>
+    <form [formGroup]="formData" (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <label for="title" class="block text-gray-700 font-bold mb-2">Title</label>
+        <input type="text" id="title" name="title" #title
+        formControlName="product_name"
+          class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+      <div class="mb-4">
+        <label for="description" class="block text-gray-700 font-bold mb-2">Description</label>
+        <textarea id="description" name="description" #description
+        formControlName="description"
+          class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+      </div>
+      <div class="mb-4">
+        <label for="price" class="block text-gray-700 font-bold mb-2">Price</label>
+        <input type="number" id="price" name="price" step="0.01" #price
+        formControlName="price"
+          class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+      <div class="mb-4">
+        <label for="stock" class="block text-gray-700 font-bold mb-2">Stock</label>
+        <input type="number" id="stock" name="stock" step="0.01" #stock
+        formControlName="stock"
+          class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+      <div class="mb-4">
+        <label for="category" class="block text-gray-700 font-bold mb-2">Category</label>
+        <input id="category" name="category" #category
+        formControlName="category_id"
+          class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+      <div class="mb-4">
+        <label for="category" class="block text-gray-700 font-bold mb-2">Add an image for the product</label>
+        <form action="" method="post" enctype="multipart/form-data">
+          <input type="file" accept=".gif, .png, .jpg, .jpeg"
+          formControlName="image" (change)="onFileSelected($event)">
+        </form>
+      </div>
+      <div class="flex justify-end">
+        <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-md"
+        (click)="submitForm();newProduct(title.value,description.value,price.value,stock.value,category.value)">Add Product</button>
+      </div>
+    </form>
+  </div>
+</div>

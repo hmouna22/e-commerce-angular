@@ -1,0 +1,207 @@
+<div class="" >
+  <div class="">
+    <h2 class="text-3xl font-bold mb-2">Hello {{ userName }}</h2>
+    <div class="flex space-x-4 ">
+      <button
+        *ngIf="!updateProfile"
+        class="bg-sky-900 rounded-full hover:bg-blue-700 text-white font-bold py-2 px-4 "
+        (click)="getUserInfo()"
+      >
+        Edit profile
+      </button>
+      <button
+        *ngIf="updateProfile"
+        class="bg-sky-900 rounded-full hover:bg-blue-700 text-white font-bold py-2 px-4 "
+        (click)="seeInfo()"
+      >
+        close the profile form
+      </button>
+      <button
+      class="bg-sky-900 rounded-full hover:bg-blue-700 text-white font-bold py-2 px-4 "
+      (click)="goToStore()"
+      >
+        Go to Store
+      </button>
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-5 "(click)="showUnshowOrders()"
+        
+      >
+        orders historic
+      </button>
+    </div>
+    <div class="p-4 bg-gray-100" *ngIf="updateProfile">
+      <h2 class="text-xl font-bold mb-2">Profile infos</h2>
+
+      <ul>
+    <li class="border-b border-gray-300 py-2 flex justify-between items-center">
+      <div>
+        <p class="text-sm text-gray-700">
+          <span class="editable">Name:</span>
+          <button
+            class="edit-icon ml-2 bg-blue-500 text-white text-lg"
+            (click)="toggleText()"
+          >
+            &#9998;
+              </button>
+            </p>
+            <p
+              class="mb-3 text-gray-500 dark:text-gray-400"
+              [contentEditable]="editText ? 'true' : 'false'"
+              #editedname
+              (input)="updateField(editedname.textContent, 'userName')"
+            >
+              {{ customerInfos.user_name }}
+            </p>
+          </div>
+        </li>
+        <li
+          class="border-b border-gray-300 py-2 flex justify-between items-center"
+        >
+          <div>
+            <p class="text-sm text-gray-700">
+              <span class="editable">Email:</span>
+              <button
+                class="edit-icon ml-2 bg-blue-500 text-white text-lg"
+                (click)="toggleText()"
+              >
+                &#9998;
+              </button>
+            </p>
+            <p
+              class="text-sm text-gray-700"
+              [contentEditable]="editText ? 'true' : 'false'"
+              #editedemail
+              (input)="updateField(editedemail.textContent, 'email')"
+            >
+              {{ customerInfos.email }}
+            </p>
+          </div>
+        </li>
+        <li
+          class="border-b border-gray-300 py-2 flex justify-between items-center"
+        >
+          <div>
+            <p class="text-sm text-gray-700">
+              <span class="editable">Phone:</span>
+              <button
+                class="edit-icon ml-2 bg-blue-500 text-white text-lg"
+                (click)="toggleText()"
+              >
+                &#9998;
+              </button>
+            </p>
+            <p
+              class="text-sm text-gray-700"
+              [contentEditable]="editText ? 'true' : 'false'"
+              #editedphone
+              (input)="updateField(editedphone.textContent, 'phone')"
+            >
+              {{ customerInfos.phone }}
+            </p>
+          </div>
+        </li>
+        <li
+          class="border-b border-gray-300 py-2 flex justify-between items-center"
+        >
+          <div>
+            <p class="text-sm text-gray-700">
+              <span class="editable">Address:</span>
+              <button
+                class="edit-icon ml-2 bg-blue-500 text-white text-lg"
+                (click)="toggleText()"
+              >
+                &#9998;
+              </button>
+            </p>
+            <p
+              class="text-sm text-gray-700"
+              [contentEditable]="editText ? 'true' : 'false'"
+              #editedaddress
+              (input)="updateField(editedaddress.textContent, 'adress')"
+            >
+              {{ customerInfos.address }}
+            </p>
+          </div>
+        </li>
+        <li
+          class="border-b border-gray-300 py-2 flex justify-between items-center"
+        >
+          <div>
+            <p class="text-sm text-gray-700">
+              <span class="editable">City:</span>
+              <button
+                class="edit-icon ml-2 bg-blue-500 text-white text-lg"
+                (click)="toggleText()"
+              >
+                &#9998;
+              </button>
+            </p>
+            <p
+              class="text-sm text-gray-700"
+              [contentEditable]="editText ? 'true' : 'false'"
+              #editedcity
+              (input)="updateField(editedcity.textContent, 'city')"
+            >
+              {{ customerInfos.city }}
+            </p>
+          </div>
+        </li>
+        <li
+          class="border-b border-gray-300 py-2 flex justify-between items-center"
+        >
+          <div>
+            <p class="text-sm text-gray-700">
+              <span class="editable">Country:</span>
+              <button
+                class="edit-icon ml-2 bg-blue-500 text-white text-lg"
+                (click)="toggleText()"
+              >
+                &#9998;
+              </button>
+            </p>
+            <p
+              class="text-sm text-gray-700"
+              [contentEditable]="editText ? 'true' : 'false'"
+              #editedcountry
+              (input)="updateField(editedcountry.textContent, 'country')"
+            >
+              {{ customerInfos.country }}
+            </p>
+          </div>
+        </li>
+        <li
+          class="border-b border-gray-300 py-2 flex justify-between items-center"
+        >
+          <div>
+            <p class="text-sm text-gray-700">
+              <span class="editable">Zip:</span>
+              <button
+                class="edit-icon ml-2 bg-blue-500 text-white text-lg"
+                (click)="toggleText()"
+              >
+                &#9998;
+              </button>
+            </p>
+            <p
+              class="text-sm text-gray-700"
+              [contentEditable]="editText ? 'true' : 'false'"
+              #editedZip
+              (input)="updateField(editedZip.textContent, 'zip')"
+            >
+              {{ customerInfos.zip_code }}
+            </p>
+          </div>
+        </li>
+      </ul>
+      <button
+        class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        (click)="saveNewInfos()"
+      >
+        Save Profile change
+      </button>
+    </div>
+  </div>
+</div>
+<div *ngIf="showOrders">
+  <app-orders></app-orders>
+</div>
